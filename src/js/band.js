@@ -8,11 +8,7 @@ const createBand = () => {
     const bandName = _bandName.value;
 
     let data = {
-        "musicians": [
-            {
-                // ...
-            }
-        ],
+        "musicians": [null],
         "name": bandName
     }
 
