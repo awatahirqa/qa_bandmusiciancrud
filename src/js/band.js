@@ -2,7 +2,11 @@
 
 const _bandName = document.querySelector("#bandName");
 const _musicians = document.querySelector("#musicians");
-const _id = document.querySelector("#id");
+
+const _bandIdUpdate = document.querySelector("#bandIdUpdate");
+const _bandNameUpdate = document.querySelector("#bandNameUpdate");
+
+const _bandIdDelete = document.querySelector("#bandIdDelete");
 
 const createBand = () => {
     const bandName = _bandName.value;
@@ -61,17 +65,18 @@ const readAllOrderByNamesBand = () => {
 }
 
 const updateBand = () => {
-    const id = _id.vlaue;
-    const musicians = _musicians.value;
-    const bandName = _bandName.value;
+    const bandIdUpdate = _bandIdUpdate.value;
+    // const musicians = _musicians.value;
+    const bandNameUpdate = _bandNameUpdate.value;
 
     let data = {
-        musicians: musicians,
-        bandName: bandName
+        // musicians: musicians,
+        "musicians": null,
+        "name": bandNameUpdate
     }
 
-    fetch(`http://localhost:8901/band/update/${id}`, {
-        method: "POST",
+    fetch(`http://localhost:8901/band/update/${bandIdUpdate}`, {
+        method: "PUT",
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json"
@@ -82,9 +87,16 @@ const updateBand = () => {
     .catch(err => console.error(`error ${err}`));
 }
 
-const deleteByIdBand = (id) => {
-    fetch(`http://localhost:8901/band/delete/${id}`)
-        .then(response => response.json())
-        .then(info => console.log(info))
-        .catch(err => console.error(`error ${err}`));
+const deleteByIdBand = () => {
+    const bandIdDelete = _bandIdDelete.value;
+
+    fetch(`http://localhost:8901/band/delete/${bandIdDelete}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(info => console.log(info))
+    .catch(err => console.error(`error ${err}`));
 }
