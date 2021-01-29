@@ -3,6 +3,8 @@
 const _bandName = document.querySelector("#bandName");
 const _musicians = document.querySelector("#musicians");
 
+const _bandIdRead = document.querySelector("#bandIdRead");
+
 const _bandIdUpdate = document.querySelector("#bandIdUpdate");
 const _bandNameUpdate = document.querySelector("#bandNameUpdate");
 
@@ -39,8 +41,10 @@ const readAllBand = () => {
         .catch(err => console.error(`error ${err}`));
 }
 
-const readByIdBand = (id) => {
-    fetch(`http://localhost:8901/band/read/${id}`)
+const readByIdBand = () => {
+    const bandIdRead = _bandIdRead.value;
+
+    fetch(`http://localhost:8901/band/read/${bandIdRead}`)
         .then(response => response.json())
         .then(info => console.log(info))
         .catch(err => console.error(`error ${err}`));

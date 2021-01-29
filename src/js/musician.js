@@ -4,6 +4,8 @@ const _musicianName = document.querySelector("#musicianName");
 const _strings = document.querySelector("#strings");
 const _type = document.querySelector("#type");
 
+const _musicianIdRead = document.querySelector("#musicianIdRead");
+
 const _musicianIdUpdate = document.querySelector("#musicianIdUpdate");
 const _musicianNameUpdate = document.querySelector("#musicianNameUpdate");
 const _musicianStringsUpdate = document.querySelector("#musicianStringsUpdate");
@@ -96,22 +98,19 @@ const musiciansbystrings = () => {
 }
 
 const musicianby_id = (id) => {
-    fetch(`http://localhost:8901/musician/read/${id}`)
+    const musicianIdRead = _musicianIdRead.value;
+
+    fetch(`http://localhost:8901/musician/read/${musicianIdRead}`)
     .then((response) => {
         // check that the response is OK (i.e. 200)
         if(response.status !== 200){
             throw new Error("I don't have a status of 200");
         }else{
-            console.log(response);
-            console.log(`response is OK (200)`);
+            // console.log(response);
+            // console.log(`response is OK (200)`);
             //json-ify it (which returns a promise)
             response.json().then((infofromserver) =>{
                 console.log(infofromserver);
-                console.log(infofromserver.data); // key - return array(6)
-                for(let musicians of infofromserver.data){
-                    console.log(musicians._id);
-                    printNameToScreen(musicians._id);
-                }
             })
         }
     }).catch((err) => {
